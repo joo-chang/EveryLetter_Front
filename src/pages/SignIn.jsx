@@ -43,22 +43,25 @@ const SignIn = () => {
   const handleAgree = event => {
     setChecked(event.target.checked)
   }
+  const handleSignIn = () => {
+
+  }
 
   const onhandlePost = async data => {
-    const { email, name, password } = data
-    const postData = { email, name, password }
+    const { email, password } = data
+    const postData = { email, password }
 
-    // // post
-    // await axios
-    //   .post("/users/login", postData)
-    //   .then(function (response) {
-    //     console.log(response, "성공")
-    //     navigate.push("/login")
-    //   })
-    //   .catch(function (err) {
-    //     console.log(err)
-    //     setRegisterError("로그인에 실패하였습니다. 다시한번 확인해 주세요.")
-    //   })
+    // post
+    await axios
+      .post("/api/users/login", postData)
+      .then(function (response) {
+        console.log(response, "성공")
+        navigate("/")
+      })
+      .catch(function (err) {
+        console.log(err)
+        setRegisterError(err.response.data.errorMessage)
+      })
   }
   const handleSignUp = (e) => {
       navigate("/signup");
@@ -79,8 +82,6 @@ const SignIn = () => {
       /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
     if (!emailRegex.test(email)) setEmailError("올바른 이메일 형식이 아닙니다.")
     else setEmailError("")
-
-
 
     if (
       emailRegex.test(email)

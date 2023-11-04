@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom"
 import './Layout.css';
 
 const pages = ['뉴스레터', '커뮤니티', '채팅'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['login', 'Account', 'Dashboard', 'Logout'];
 
 function Header() {
   const navigate = useNavigate();
@@ -82,7 +82,7 @@ function Header() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar alt="Remy Sharp" src="" />
                 </IconButton>
               </Tooltip>
               <Menu
