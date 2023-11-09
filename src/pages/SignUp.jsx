@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import axios from "axios"
 import {
   Avatar,
   Alert,
@@ -20,6 +19,7 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 import styled from "styled-components"
 import EmailAuth from "../components/EmailAuth"
+import axios from "axios"
 
 // mui의 css 우선순위가 높기때문에 important를 설정 - 실무하다 보면 종종 발생 우선순위 문제
 const FormHelperTexts = styled(FormHelperText)`
@@ -77,11 +77,11 @@ const SignUp = () => {
     // post
     if(confirm('회원가입 하시겠습니까?')){
       await axios
-        .post("/api/users/join", data)
+        .post("/api/auth/signup", data)
         .then(function (response) {
           console.log(response, "성공");
           alert("회원가입을 완료했습니다.");
-          navigate('/signin');
+          navigate('/login');
         })
         .catch(function (err) {
           console.log(err.response)
@@ -91,9 +91,9 @@ const SignUp = () => {
   }
 
   // 이메일 인증 요청
-  const handleEmailSend = () => {
+  const handleEmailSend = async data=> {
     if(confirm('이메일을 전송 하시겠습니까?')){
-      axios
+      await axios
       .post("/api/users/join/email/send", {email})
       .then(function (response) {
         console.log(response, "성공")
@@ -142,7 +142,7 @@ const SignUp = () => {
     else setPasswordError("")
 
     // 닉네임 유효성 검사
-    const nicknameRegex = /^[가-힣a-zA-Z0-9]+$/
+    const nicknameRegex = /^[가-힣a-zA-Z0-9]{2,30}$/
     if (!nicknameRegex.test(nickname) || nickname.length < 1)
       setNameError("올바른 닉네임을 입력해주세요.")
     else setNameError("")

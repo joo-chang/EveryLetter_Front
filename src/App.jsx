@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 import SignUp from './pages/SignUp'
 import Home from './pages/Home'
 import React from 'react'
-import SignIn from './pages/SignIn'
+import Login from './pages/Login'
 import Header from './layout/Header'
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material'
 import Album from './pages/Album'
@@ -25,7 +25,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Album/>}/>
                 <Route path='/signup' element={<SignUp/>}/>
-                <Route path="/signin" element={<SignIn/>}/>
+                <Route path="/login" element={<Login/>}/>
                 <Route path="/album" element={<Album/>}/>
               </Routes>
             </Content>

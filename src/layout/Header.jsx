@@ -16,16 +16,12 @@ import { useNavigate } from "react-router-dom"
 import './Layout.css';
 
 const pages = ['뉴스레터', '커뮤니티', '채팅'];
-const settings = ['login', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Login', 'Account', 'Dashboard', 'Logout'];
 
 function Header() {
   const navigate = useNavigate();
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -41,7 +37,15 @@ function Header() {
     }
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (e) => {
+    console.log(e.target.innerText);
+    if(e.target.innerText === 'Login'){
+      navigate("/login");
+    }else if (e.target.value === '커뮤니티'){
+      navigate("/community")
+    }else if (e.target.value === '채팅'){
+      navigate("/chat");
+    }
     setAnchorElUser(null);
   };
 
@@ -102,8 +106,8 @@ function Header() {
                 onClose={handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                  <MenuItem key={setting} onClick={handleCloseUserMenu} value={setting}>
+                    <Typography textAlign="center" onClick={handleCloseUserMenu} value={setting}>{setting}</Typography>
                   </MenuItem>
                 ))}
               </Menu>

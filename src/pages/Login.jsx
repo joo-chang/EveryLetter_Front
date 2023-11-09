@@ -1,7 +1,6 @@
 
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import axios from "axios"
 import {
   Avatar,
   Button,
@@ -18,6 +17,9 @@ import {
 } from "@mui/material/"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 import styled from "styled-components"
+import { setCookie } from "../util/cookie"
+import customAxios from "../util/api"
+import axios from "axios"
 
 // mui의 css 우선순위가 높기때문에 important를 설정 - 실무하다 보면 종종 발생 우선순위 문제
 const FormHelperTexts = styled(FormHelperText)`
@@ -31,7 +33,7 @@ const Boxs = styled(Box)`
   padding-bottom: 40px !important;
 `
 
-const SignIn = () => {
+const Login = () => {
   const [checked, setChecked] = useState(false)
   const [emailError, setEmailError] = useState("")
   const [passwordState, setPasswordState] = useState("")
@@ -43,9 +45,6 @@ const SignIn = () => {
   const handleAgree = event => {
     setChecked(event.target.checked)
   }
-  const handleSignIn = () => {
-
-  }
 
   const onhandlePost = async data => {
     const { email, password } = data
@@ -53,9 +52,12 @@ const SignIn = () => {
 
     // post
     await axios
-      .post("/api/users/login", postData)
+      .post("/api/auth/login", postData)
       .then(function (response) {
-        console.log(response, "성공")
+        const refreshToken = response.data.data.refreshToken;
+        const accessToken = response.data.data.accessToken;
+        setCookie('refreshToken', refreshToken); // 쿠키에 토큰 저장
+        localStorage.setItem('accessToken', accessToken);
         navigate("/")
       })
       .catch(function (err) {
@@ -182,4 +184,4 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default Login

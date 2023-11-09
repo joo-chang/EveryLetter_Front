@@ -11,11 +11,28 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import customAxios from '../util/api';
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
 
 function Album(props) {
 
+  // 테스트
+  const handleJoin = async data => {
+    // post
+    await customAxios
+      .post("/api/api/reviews", {})
+      .then(function (response) {
+        console.log(response, "성공");
+        alert("회원가입을 완료했습니다.");
+        // navigate('/signin');
+      })
+      .catch(function (err) {
+        console.log(err)
+        // setRegisterError(err.response.data.errorMessage)
+      })
+
+  }
   return (
     <>
         {/* Hero unit */}
@@ -26,7 +43,9 @@ function Album(props) {
             </Typography>
             <Typography variant="h6" align="center" color="textSecondary" paragraph>
             </Typography>
-
+            <Button size="small" color="primary" onClick={handleJoin}>
+                      Edit
+                    </Button>
           </div>
         </div>
         <div >
