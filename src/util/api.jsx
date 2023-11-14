@@ -62,11 +62,12 @@ customAxios.interceptors.response.use(
             window.location.href = '/login';
         }else{
             const accessToken = localStorage.getItem('accessToken');
-            const refreshToken = getCookie("refreshToken");
-            console.log(accessToken);
-            console.log(refreshToken);
-            if(accessToken && refreshToken){
-                const postData = {accessToken, refreshToken}
+            // const refreshToken = getCookie("refreshToken");
+            // console.log(accessToken);
+            // console.log( getCookie("refreshToken"));
+            // console.log(refreshToken);
+            if(accessToken){
+                const postData = {accessToken}
                 await axios.post("/api/auth/reissue", postData)
                 .then(function (response) {
                     console.log(response.data);
