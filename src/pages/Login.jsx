@@ -20,6 +20,8 @@ import styled from "styled-components"
 import { setCookie } from "../util/cookie"
 import customAxios from "../util/api"
 import axios from "axios"
+import KakaoLogin from "../oauth/KakaoLogin"
+import NaverLogin from "../oauth/NaverLogin"
 
 // mui의 css 우선순위가 높기때문에 important를 설정 - 실무하다 보면 종종 발생 우선순위 문제
 const FormHelperTexts = styled(FormHelperText)`
@@ -54,9 +56,7 @@ const Login = () => {
     await axios
       .post("/api/auth/login", postData)
       .then(function (response) {
-        const refreshToken = response.data.data.refreshToken;
-        const accessToken = response.data.data.accessToken;
-        setCookie('refreshToken', refreshToken); // 쿠키에 토큰 저장
+        const accessToken = response.headers.authorization
         localStorage.setItem('accessToken', accessToken);
         navigate("/")
       })
@@ -149,10 +149,8 @@ const Login = () => {
               >
                 로그인
               </Button>
-            </FormControl>
+             </FormControl>
             <Grid container spacing={2}>
-
-            
               <Grid item xs={6}>
                 <Button
                   type="submit"
@@ -175,6 +173,14 @@ const Login = () => {
                 >
                   회원가입
                 </Button>
+              </Grid>
+            </Grid>
+             <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <KakaoLogin />
+              </Grid>
+              <Grid item xs={6}>
+                <NaverLogin />
               </Grid>
             </Grid>
             <FormHelperTexts>{registerError}</FormHelperTexts>

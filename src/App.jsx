@@ -12,6 +12,8 @@ import Footer from './layout/Footer'
 import './layout/Layout.css'
 import Content from './layout/Content'
 import { theme } from "./theme";
+import KakaoCallback from './oauth/KakaoCallback'
+import NaverCallback from './oauth/NaverCallback'
 
 function App() {
   return (
@@ -23,10 +25,17 @@ function App() {
             <Header/>
             <Content>
               <Routes>
+                {/* 메인 페이지 */}
                 <Route path="/" element={<Album/>}/>
+
+
+                <Route path="/album" element={<Album/>}/>
+
+                {/* 회원 가입, 로그인 페이지 */}
                 <Route path='/signup' element={<SignUp/>}/>
                 <Route path="/login" element={<Login/>}/>
-                <Route path="/album" element={<Album/>}/>
+                <Route path="/auth/kakao/callback" element={<KakaoCallback />} />
+                <Route path="/auth/naver/callback" element={<NaverCallback />} />
               </Routes>
             </Content>
           </div>
