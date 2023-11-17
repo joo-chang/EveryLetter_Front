@@ -16,7 +16,7 @@ import customAxios from '../util/api';
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
 
 function Album(props) {
-
+  
   // 테스트
   const handleJoin = async data => {
     // post
@@ -25,7 +25,6 @@ function Album(props) {
       .then(function (response) {
         console.log(response, "성공");
         alert("회원가입을 완료했습니다.");
-        // navigate('/signin');
       })
       .catch(function (err) {
         console.log(err)

@@ -66,7 +66,7 @@ function Header() {
                 textDecoration: 'none',
               }}
             >
-              EveryLetter USER
+              EveryLetter
             </Typography>
 
             <Box sx={{flexGrow: 0.98}}></Box>

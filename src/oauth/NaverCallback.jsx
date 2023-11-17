@@ -20,7 +20,14 @@ function NaverCallback() {
       navigate("/")
     }).catch((err) => {
       //에러발생 시 경고처리 후 login 페이지로 전환
-      window.location.href = "/login";
+      const errorCode = err.response.data.errorCode;
+      const errorMessage = err.response.data.errorMessage;
+      if(errorCode === "ALREADY_EXIST_USER"){
+        alert(errorMessage)
+      }else if(errorCode === "INTERNAL_SERVER_ERROR"){
+        alert(errorMessage)
+      }
+      navigate("/login")
     })
   }, []);
   
