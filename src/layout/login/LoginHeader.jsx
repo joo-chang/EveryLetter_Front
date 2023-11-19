@@ -13,12 +13,13 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useNavigate } from "react-router-dom"
-import './Layout.css';
+import '../Layout.css';
+import { deleteLoginInfo } from '../../util/common';
 
 const pages = ['뉴스레터', '커뮤니티', '채팅'];
-const settings = ['Login', 'Account', 'Dashboard', 'Logout'];
+const settings = ['내정보', '로그아웃'];
 
-function Header() {
+function LoginHeader() {
   const navigate = useNavigate();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -39,12 +40,10 @@ function Header() {
 
   const handleCloseUserMenu = (e) => {
     console.log(e.target.innerText);
-    if(e.target.innerText === 'Login'){
-      navigate("/login");
-    }else if (e.target.value === '커뮤니티'){
-      navigate("/community")
-    }else if (e.target.value === '채팅'){
-      navigate("/chat");
+    if(e.target.innerText === '내정보'){
+    }else if (e.target.innerText === '로그아웃'){
+      deleteLoginInfo();
+      navigate('/login');
     }
     setAnchorElUser(null);
   };
@@ -118,4 +117,4 @@ function Header() {
 
   );
 }
-export default Header;
+export default LoginHeader;

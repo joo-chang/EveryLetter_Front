@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Loading from "../components/Loading";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { setCookie } from "../util/cookie";
+import { setLoginInfo } from "../util/common";
 
 function KakaoCallback() {
     const navigate = useNavigate()
@@ -16,10 +16,11 @@ function KakaoCallback() {
         authorizationCode: code
       }).then((response) => {
           const accessToken = response.headers.authorization
-          localStorage.setItem('accessToken', accessToken);
+          setLoginInfo(accessToken);
           navigate("/")
         }).catch((err) => {
           //에러발생 시 경고처리 후 login 페이지로 전환
+          console.log(err);
           const errorCode = err.response.data.errorCode;
           const errorMessage = err.response.data.errorMessage;
           if(errorCode === "ALREADY_EXIST_USER"){

@@ -15,8 +15,8 @@ function NaverCallback() {
       authorizationCode: code,
       state: state
     }).then((response) => {
-      const accessToken = response.headers.authorization
-      localStorage.setItem('accessToken', accessToken);
+      const accessToken = response.headers.authorization;
+      setLoginInfo(accessToken);
       navigate("/")
     }).catch((err) => {
       //에러발생 시 경고처리 후 login 페이지로 전환

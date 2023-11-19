@@ -15,8 +15,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { useNavigate } from "react-router-dom"
 import './Layout.css';
 
-const pages = ['뉴스레터', '커뮤니티', '채팅'];
-const settings = ['Login', 'Account', 'Dashboard', 'Logout'];
+const pages = ['뉴스레터', '커뮤니티', '로그인'];
 
 function Header() {
   const navigate = useNavigate();
@@ -32,21 +31,9 @@ function Header() {
       navigate("/album");
     }else if (e.target.value === '커뮤니티'){
       navigate("/community")
-    }else if (e.target.value === '채팅'){
-      navigate("/chat");
-    }
-  };
-
-  const handleCloseUserMenu = (e) => {
-    console.log(e.target.innerText);
-    if(e.target.innerText === 'Login'){
+    }else if (e.target.value === '로그인'){
       navigate("/login");
-    }else if (e.target.value === '커뮤니티'){
-      navigate("/community")
-    }else if (e.target.value === '채팅'){
-      navigate("/chat");
     }
-    setAnchorElUser(null);
   };
 
   return (
@@ -66,7 +53,7 @@ function Header() {
                 textDecoration: 'none',
               }}
             >
-              EveryLetter USER
+              EveryLetter
             </Typography>
 
             <Box sx={{flexGrow: 0.98}}></Box>
@@ -81,36 +68,6 @@ function Header() {
                   {page}
                 </Button>
               ))}
-            </Box>
-          
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="" />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: '45px' }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu} value={setting}>
-                    <Typography textAlign="center" onClick={handleCloseUserMenu} value={setting}>{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
             </Box>
           </Toolbar>
         </Container>

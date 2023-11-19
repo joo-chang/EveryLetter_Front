@@ -22,6 +22,7 @@ import customAxios from "../util/api"
 import axios from "axios"
 import KakaoLogin from "../oauth/KakaoLogin"
 import NaverLogin from "../oauth/NaverLogin"
+import { setLoginInfo } from "../util/common"
 
 // mui의 css 우선순위가 높기때문에 important를 설정 - 실무하다 보면 종종 발생 우선순위 문제
 const FormHelperTexts = styled(FormHelperText)`
@@ -57,7 +58,7 @@ const Login = () => {
       .post("/api/auth/login", postData)
       .then(function (response) {
         const accessToken = response.headers.authorization
-        localStorage.setItem('accessToken', accessToken);
+        setLoginInfo(accessToken);
         navigate("/")
       })
       .catch(function (err) {
