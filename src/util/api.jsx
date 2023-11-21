@@ -1,6 +1,7 @@
 import axios from "axios";
 import { getCookie, removeCookie } from "./cookie";
 import { useNavigate } from "react-router-dom";
+import { deleteLoginInfo } from "./common";
 
 const customAxios = axios.create();
 // const navigate = useNavigate();
@@ -59,9 +60,7 @@ customAxios.interceptors.response.use(
       console.log(response);
       if (response.data.errorCode == "EXPIRED_REFRESH_TOKEN") {
         alert("토큰 만료. 재로그인 해주세요.");
-        localStorage.removeItem("accessToken");
-        removeCookie("refreshToken");
-        // navigate("/login");
+        deleteLoginInfo();
         window.location.href = "/login";
       } else {
         const accessToken = localStorage.getItem("accessToken");
@@ -87,8 +86,7 @@ customAxios.interceptors.response.use(
               console.log(err.response);
               if (err.response.status === 401) {
                 alert("토큰 만료. 재로그인 해주세요.");
-                localStorage.removeItem("accessToken");
-                removeCookie("refreshToken");
+                deleteLoginInfo();
                 window.location.href = "/login";
               }
             });

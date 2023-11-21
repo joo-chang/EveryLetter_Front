@@ -11,11 +11,10 @@ import { theme } from "./theme";
 import Router from "./util/Route/Router";
 
 function App() {
-
   return (
     <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Router/>
+      <CssBaseline />
+      <Router />
     </ThemeProvider>
   );
 }

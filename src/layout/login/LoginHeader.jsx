@@ -32,7 +32,7 @@ function LoginHeader() {
     if(e.target.value === '뉴스레터'){
       navigate("/album");
     }else if (e.target.value === '커뮤니티'){
-      navigate("/community")
+      navigate("/post/write")
     }else if (e.target.value === '채팅'){
       navigate("/chat");
     }

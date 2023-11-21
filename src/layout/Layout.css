@@ -4,13 +4,15 @@
 
 .header {
 	width: 100%;
+    min-height: 5vh;
 	top: 0;
     background-color: #f8f8f8;
 }
 
 .content {
-	min-height: calc(100vh - 30px);
-	padding-top: 60px;
+	min-height: 70vh;
+    margin-bottom: 5vh;
+    margin-top: 5vh;
     margin-left: 10vh;
     margin-right: 10vh;
     max-width: "xl";
@@ -18,20 +20,12 @@
 
 .footer {
 	width: 100%;
-    padding: 50px;
+    min-height: 13vh;
+    padding-left: 50px;
+    padding-top: 30px;
     background-color: #f8f8f8;
     max-width: 'xl';
 }
-
-.wrapper{
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-  }
-  
-  .contentWrapper{
-    flex: 1;
-  }
 
 hr {
     border: 0;

@@ -20,12 +20,27 @@ const category = [
       {
         idx: 2,
         name: "앨범 테스트",
-        path: "/test", // sub은 부모의 path가 prefix로 붙는다. 그래서 회원 관리 최종 url은 http://localhost:3000/admin/member가 된다.
+        path: "/test", // sub은 부모의 path가 prefix로 붙는다. 그래서 회원 관리 최종 url은 http://localhost:5173/album/test 된다.
         role: ["ADMIN"],
         sub: [],
       },
-    ],
+    ]
   },
+  {
+    idx: 3,
+    name: "커뮤니티",
+    path: "/post",
+    role: ["USER", "LETTER", "ADMIN"],
+    sub: [
+      {
+        idx: 4,
+        name: "게시글 작성",
+        path: "/write", 
+        role: ["USER", "LETTER", "ADMIN"],
+        sub: [],
+      },
+    ],
+  }
 ];
 export default function ProtectRoute() {
   // 현재 Url정보를 갖고 오기 위해서 useLocation Hooks사용

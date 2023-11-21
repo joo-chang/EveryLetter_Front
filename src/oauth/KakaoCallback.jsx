@@ -23,7 +23,7 @@ function KakaoCallback() {
           console.log(err);
           const errorCode = err.response.data.errorCode;
           const errorMessage = err.response.data.errorMessage;
-          if(errorCode === "ALREADY_EXIST_USER"){
+          if(errorCode === "ALREADY_EXIST_USER"){ 
             alert(errorMessage)
           }else if(errorCode === "INTERNAL_SERVER_ERROR"){
             alert(errorMessage)

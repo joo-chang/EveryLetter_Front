@@ -1,4 +1,5 @@
 import { jwtDecode } from "jwt-decode";
+import { removeCookie } from "./cookie";
 
 export const setLoginInfo = (accessToken) => {
     const decodedToken = jwtDecode(accessToken);
@@ -12,8 +13,10 @@ export const setLoginInfo = (accessToken) => {
 };
 
 export const deleteLoginInfo = () => {
+    
     localStorage.setItem('isAuthenticated', 'false');
     localStorage.removeItem('accessToken');
     localStorage.removeItem('userRole');
     localStorage.removeItem('userNo');
+    removeCookie("refreshToken");
 };

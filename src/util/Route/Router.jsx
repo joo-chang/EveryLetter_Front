@@ -10,12 +10,12 @@ import Home from "../../pages/Home";
 import ProtectRoute from "./ProtectRouteProps";
 import Albumtest from "../../pages/Albumtest";
 import LoginLayout from "../../layout/login/LoginLayout";
+import Post from "../../pages/community/Post";
 
 export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        
         <Route element={<DefaultLayout/>}>
           {/* <Route index element={<Home />} /> */}
         </Route>
@@ -39,7 +39,10 @@ export default function Router() {
               <Route path="/" element={<Home />} />
               <Route path="/album" element={<Album />}/>
               <Route path="/album/test" element={<Albumtest />}/>
+              <Route path="/post/write" element={<Post />}/>
             </Route>
+          </Route>
+          <Route element={<ProtectRoute/>}>
           </Route>
         </Route>
       </Routes>
