@@ -11,12 +11,10 @@ const Post = () => {
         title: "",
         content: "",
         categoryId: 0,
-        userId: 0
+        userId: localStorage.getItem('userId')
     })
 
-    useEffect(() => {
-      console.log(inputs.title + " " + inputs.content);
-    }, [inputs]);    //
+        //
     // const onChange = e => {
     //     setInputs(prestate => {
     //     return {
@@ -25,11 +23,9 @@ const Post = () => {
     //     }
     //     });
     // };
-    const { title, content } = inputs;
+    const { title, content, categoryId, userId } = inputs;
 
     const handlePost = () => {
-      console.log(inputs.title)
-      console.log(inputs.content)
         if(confirm('해당 글을 게시 하시겠습니까?')){
             customAxios.post("/api/post/write", inputs)
             .then(function (response) {
@@ -39,7 +35,7 @@ const Post = () => {
             })
             .catch(function (err) {
                 console.log(err.response)
-        })
+            })
       }
     }
 

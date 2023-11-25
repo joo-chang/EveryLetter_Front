@@ -10,7 +10,7 @@ import Home from "../../pages/Home";
 import ProtectRoute from "./ProtectRouteProps";
 import Albumtest from "../../pages/Albumtest";
 import LoginLayout from "../../layout/login/LoginLayout";
-import Post from "../../pages/community/Post";
+import Post from "../../pages/post/Post";
 
 export default function Router() {
   return (

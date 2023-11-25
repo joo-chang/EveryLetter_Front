@@ -5,11 +5,11 @@ export const setLoginInfo = (accessToken) => {
     const decodedToken = jwtDecode(accessToken);
     console.log(decodedToken);
     const userRole = decodedToken.auth.substring(5);
-    const userNo = decodedToken.sub;
+    const userId = decodedToken.sub;
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('isAuthenticated', 'true');
     localStorage.setItem('userRole', userRole);
-    localStorage.setItem('userNo', userNo);
+    localStorage.setItem('userId', userId);
 };
 
 export const deleteLoginInfo = () => {
@@ -17,6 +17,6 @@ export const deleteLoginInfo = () => {
     localStorage.setItem('isAuthenticated', 'false');
     localStorage.removeItem('accessToken');
     localStorage.removeItem('userRole');
-    localStorage.removeItem('userNo');
+    localStorage.removeItem('userId');
     removeCookie("refreshToken");
 };

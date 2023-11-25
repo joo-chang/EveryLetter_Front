@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Loading from "../components/Loading";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { setLoginInfo } from "../util/common";
 
 function NaverCallback() {
   const navigate = useNavigate()
