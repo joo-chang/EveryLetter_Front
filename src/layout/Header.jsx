@@ -13,20 +13,15 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useNavigate } from "react-router-dom"
-import './Layout.css';
 
 const pages = ['뉴스레터', '커뮤니티', '로그인'];
 
 function Header() {
   const navigate = useNavigate();
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = (e) => {
     console.log(e.target.value);
+    setSelectedMenu(e.target.value);
     if(e.target.value === '뉴스레터'){
       navigate("/album");
     }else if (e.target.value === '커뮤니티'){

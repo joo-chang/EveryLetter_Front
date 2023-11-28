@@ -11,6 +11,7 @@ import ProtectRoute from "./ProtectRouteProps";
 import Albumtest from "../../pages/Albumtest";
 import LoginLayout from "../../layout/login/LoginLayout";
 import Post from "../../pages/post/Post";
+import BBS from "../../pages/post/Bbs";
 
 export default function Router() {
   return (
@@ -40,6 +41,7 @@ export default function Router() {
               <Route path="/album" element={<Album />}/>
               <Route path="/album/test" element={<Albumtest />}/>
               <Route path="/post/write" element={<Post />}/>
+              <Route path="/post" element={<BBS />}/>
             </Route>
           </Route>
           <Route element={<ProtectRoute/>}>

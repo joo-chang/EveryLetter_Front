@@ -31,7 +31,7 @@ const Post = () => {
             .then(function (response) {
                 console.log(response, "성공");
                 alert("게시글 등록 완료했습니다.");
-                navigate('/');
+                navigate('/post');
             })
             .catch(function (err) {
                 console.log(err.response)
@@ -50,3 +50,4 @@ const Post = () => {
     )
   }
   export default Post;
+  

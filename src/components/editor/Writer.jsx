@@ -105,22 +105,17 @@ export default function Writer(props) {
       placeholder="글을 작성해 주세요"
       onChange={onChangeContent}
       height="60vh"
-      toolbarItems={[
-          ["bold", "italic", "strike"],
-          ["hr"],
-          ["ul", "ol"],
-          ["code", "codeblock"],
-      ]}
       hooks={{
         addImageBlobHook: async (blob, callback) => {
           const formData = new FormData();
           console.log(formData)
           formData.append("file", blob);
           const img = await customAxios.post(
-            "/api/post/image",
+            "/api/file/upload",
             formData
           );
-          const url = img.data[0].boardImageUrl;
+          console.log(img);
+          const url = img.data.data;
 
           callback(url, "");
         },

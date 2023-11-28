@@ -6,7 +6,6 @@
 	width: 100%;
     min-height: 5vh;
 	top: 0;
-    background-color: #f8f8f8;
 }
 
 .content {
@@ -31,4 +30,7 @@ hr {
     border: 0;
     height: 0.1px;
     background-color:#9e9e9e;
+}
+.selected{
+    background-color: #6359b6;
 }
