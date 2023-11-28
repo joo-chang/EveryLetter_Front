@@ -2,10 +2,11 @@ import { useNavigate } from "react-router-dom";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { Box, Button, Grid, IconButton } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import customAxios from "../../util/api";
 import AddIcon from '@mui/icons-material/Add';
+import SubCard from '../../components/SubCard';
 
 const BBS = () => {
     const navigate = useNavigate();
@@ -37,7 +38,9 @@ const BBS = () => {
           setCategoryId(2)
         }
       };
-    
+    const handlePostDetail = (board) => {
+      console.log(board.id)
+    };
     const handleAddPost = () => {
       navigate('/post/write');
     }
@@ -52,7 +55,7 @@ const BBS = () => {
     return (
         <>
             <Grid container spacing={2} justifyContent={"center"}>
-                <Grid item xs={8} >
+                <Grid item xs={10} >
                     <Card >
                         <CardContent>
                             <Typography sx={{ fontSize: 18 }} bcolor="text.secondary" gutterBottom>
@@ -65,10 +68,7 @@ const BBS = () => {
                     </Card>
                 </Grid>
             </Grid>
-            <Grid container 
-  justifyContent="center"
-  alignItems="center">
-              <Grid item xs={2}>
+            <Box sx={{ display: 'flex', justifyContent:'center' }}>
                 {categorys.map((page) => (
                   <Button
                     key={page}
@@ -79,25 +79,20 @@ const BBS = () => {
                     {page}
                   </Button>
                 ))}
-              </Grid>
-            </Grid>
-            <Grid container spacing={2} justifyContent={"flex-end"}>
-              <Grid item xs={1}>
-                <Button variant="contained" onClick={handleAddPost} startIcon={<AddIcon />}>
-                  작성하기
-                </Button>
-                {/* <IconButton color="secondary" aria-label="add an alarm">
-                  <AddIcon>작성하기</AddIcon>
-                </IconButton> */}
-              </Grid>
-            </Grid>
-            <ul>
+            </Box>
+            <Button variant="contained" onClick={handleAddPost} startIcon={<AddIcon />}>
+              작성하기
+            </Button>
+            <hr/>
+            <Box>
                 {boardList.map((board) => (
-                    // 4) map 함수로 데이터 출력
-                    <li key={board.id}>{board.title}{board.viewCnt}</li>
+                    <Grid key={board.id} item xs={12} margin={1}>
+                        <SubCard title={board.title} onClick={() => handlePostDetail(board)}>
+                            {board.viewCnt}
+                        </SubCard>
+                    </Grid>
                 ))}
-            </ul>
-            
+            </Box>
         </>
     )
   }

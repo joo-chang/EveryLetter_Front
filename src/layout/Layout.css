@@ -12,8 +12,8 @@
 	min-height: 70vh;
     margin-bottom: 5vh;
     margin-top: 5vh;
-    margin-left: 10vh;
-    margin-right: 10vh;
+    margin-left: 20vh;
+    margin-right: 20vh;
     max-width: "xl";
 }
 
@@ -30,7 +30,4 @@ hr {
     border: 0;
     height: 0.1px;
     background-color:#9e9e9e;
-}
-.selected{
-    background-color: #6359b6;
 }
