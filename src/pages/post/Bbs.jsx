@@ -40,6 +40,7 @@ const BBS = () => {
       };
     const handlePostDetail = (board) => {
       console.log(board.id)
+      navigate('/post/detail', {state: board.id})
     };
     const handleAddPost = () => {
       navigate('/post/write');

@@ -12,6 +12,7 @@ import Albumtest from "../../pages/Albumtest";
 import LoginLayout from "../../layout/login/LoginLayout";
 import Post from "../../pages/post/Post";
 import BBS from "../../pages/post/Bbs";
+import PostDetail from "../../pages/post/PostDetail";
 
 export default function Router() {
   return (
@@ -41,6 +42,7 @@ export default function Router() {
               <Route path="/album" element={<Album />}/>
               <Route path="/album/test" element={<Albumtest />}/>
               <Route path="/post/write" element={<Post />}/>
+              <Route path="/post/detail" element={<PostDetail />}/>
               <Route path="/post" element={<BBS />}/>
             </Route>
           </Route>

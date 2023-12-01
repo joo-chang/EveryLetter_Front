@@ -39,6 +39,13 @@ const category = [
         role: ["USER", "LETTER", "ADMIN"],
         sub: [],
       },
+      {
+        idx: 5,
+        name: "게시글 상세",
+        path: "/detail", 
+        role: ["USER", "LETTER", "ADMIN"],
+        sub: [],
+      }
     ],
   }
 ];
