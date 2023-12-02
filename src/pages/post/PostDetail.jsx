@@ -1,8 +1,9 @@
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Viewer } from '@toast-ui/react-editor';
 import 'prismjs/themes/prism.css';
-import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
+import 'prismjs/components/prism-java.js';
 import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
 import Prism from 'prismjs';
 import { useEffect, useState } from 'react';
 import customAxios from '../../util/api';
@@ -54,7 +55,7 @@ const PostDetail = (props) => {
         title={post.nickname}
         subheader={ post.createdDate}
       />
-            <CardContent>
+            <CardContent sx={{margin:'20px'}}>
                 <Typography gutterBottom variant="h5" component="div">
                     {post.title}
                 </Typography>

@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import Prism from 'prismjs';
 // 여기 css를 수정해서 코드 하이라이팅 커스텀 가능
 import 'prismjs/themes/prism.css';
-
+import 'prismjs/components/prism-java.js';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
 
@@ -104,6 +104,7 @@ export default function Writer(props) {
       initialEditType="markdown"
       placeholder="글을 작성해 주세요"
       onChange={onChangeContent}
+      plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}
       height="60vh"
       hooks={{
         addImageBlobHook: async (blob, callback) => {
