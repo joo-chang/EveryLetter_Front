@@ -23,31 +23,21 @@ const SubCard = forwardRef(({ children, content, contentClass, darkTitle, second
             }}
             {...others}
         >
-            {/* card header and action */}
-            {!darkTitle && title && <CardHeader title={<Typography >{title}</Typography>} action={secondary} />}
-            {darkTitle && title && <CardHeader title={<Typography >{title}</Typography>} action={secondary} />}
-
             {/* card content */}
             {content && (
-                <CardContent sx={{...contentSX }} className={contentClass || ''}>
+                <CardContent sx={{...contentSX}} className={contentClass || ''}>
                     {children}
                 </CardContent>
             )}
             {!content && children}
+            {/* card header and action */}
+            {!darkTitle && title && <CardHeader title={<Typography >{title}</Typography>} action={secondary} />}
+            {darkTitle && title && <CardHeader title={<Typography >{title}</Typography>} action={secondary} />}
+
         </Card>
     );
 });
 
-SubCard.propTypes = {
-    children: PropTypes.node,
-    content: PropTypes.bool,
-    contentClass: PropTypes.string,
-    darkTitle: PropTypes.bool,
-    secondary: PropTypes.oneOfType([PropTypes.node, PropTypes.string, PropTypes.object]),
-    sx: PropTypes.object,
-    contentSX: PropTypes.object,
-    title: PropTypes.oneOfType([PropTypes.node, PropTypes.string, PropTypes.object])
-};
 
 SubCard.defaultProps = {
     content: true

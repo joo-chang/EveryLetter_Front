@@ -10,6 +10,8 @@ import customAxios from '../../util/api';
 import { useLocation } from 'react-router-dom';
 import { Avatar, Card, CardContent, CardHeader, IconButton, Typography } from '@mui/material';
 import moment from 'moment';
+import { elapsedTime } from "../../util/common"
+import ReplyCard from '../../components/ReplyCard';
 
 const PostDetail = (props) => {
     const { state } = useLocation();
@@ -41,19 +43,13 @@ const PostDetail = (props) => {
 
   return (
     <>
-        <Card > 
+        <Card sx={{marginBottom:2}}> 
             <CardHeader
         avatar={
-          <Avatar aria-label="recipe">
-            사진
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-          </IconButton>
+          <Avatar aria-label="recipe" src={post.profileUrl} />
         }
         title={post.nickname}
-        subheader={ post.createdDate}
+        subheader={ elapsedTime(post.createdDate) }
       />
             <CardContent sx={{margin:'20px'}}>
                 <Typography gutterBottom variant="h5" component="div">
@@ -67,8 +63,9 @@ const PostDetail = (props) => {
                     />
                 )}
             </CardContent>
-        
+            
         </Card>
+        <ReplyCard postId={post.postId} />
       
     </>
   );

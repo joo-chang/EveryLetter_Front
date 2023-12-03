@@ -2,11 +2,13 @@ import { useNavigate } from "react-router-dom";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { Box, Button, Grid } from "@mui/material";
+import { Avatar, Box, Button, Grid, IconButton, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import customAxios from "../../util/api";
 import AddIcon from '@mui/icons-material/Add';
 import SubCard from '../../components/SubCard';
+import { Edit, LocationOn } from "@mui/icons-material";
+import { elapsedTime } from "../../util/common";
 
 const BBS = () => {
     const navigate = useNavigate();
@@ -89,7 +91,12 @@ const BBS = () => {
                 {boardList.map((board) => (
                     <Grid key={board.id} item xs={12} margin={1}>
                         <SubCard title={board.title} onClick={() => handlePostDetail(board)}>
-                            {board.viewCnt}
+                          <Box sx={{ display: 'flex'}}>
+                            <Avatar sx={{width: 20, height: 20, marginRight:1}} aria-label="recipe" src={board.profileUrl} />
+                            <Typography sx={{fontSize:12, marginRight:1}}>{board.nickname}</Typography>  
+                            <Typography sx={{fontSize:12}} color="text.secondary"> {elapsedTime(board.createdDate)}
+                            </Typography>
+                          </Box>
                         </SubCard>
                     </Grid>
                 ))}

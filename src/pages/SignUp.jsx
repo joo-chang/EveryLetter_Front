@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useCallback, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import {
   Avatar,
@@ -38,11 +38,14 @@ const SignUp = () => {
   const [passwordError, setPasswordError] = useState("");
   const [nameError, setNameError] = useState("");
   const [registerError, setRegisterError] = useState("");
+  const [url, setUrl] = useState("");
   const navigate = useNavigate();
+  const inputRef = useRef();
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
-    nickname: ""
+    nickname: "",
+    profile:"",
   })
   const onChange = e => {
     setInputs(prestate => {
@@ -53,7 +56,7 @@ const SignUp = () => {
     });
   };
   const {
-    email, password, nickname, rePassword
+    email, password, nickname, rePassword, profile
   } = inputs;
 
   // 인증 완료 후 이메일 TextField, 이메일 인증 버튼 비활성화
@@ -67,9 +70,6 @@ const SignUp = () => {
   // 약관 동의 체크 여부
   const handleAgree = event => {
     setChecked(event.target.checked)
-  }
-  const dialog = () => {
-
   }
   
   // 회원가입 요청
@@ -119,6 +119,30 @@ const SignUp = () => {
         handleEmailSend()
       }
   }
+  const onUploadImage = useCallback(async (e) => {
+    if (!e.target.files) {
+      return;
+    }
+    console.log(e.target.files[0].name);
+    const formData = new FormData();
+    console.log(formData)
+    formData.append("file", e.target.files[0]);
+    const img = await axios.post(
+      "/api/file/upload",
+      formData
+    );
+    console.log(img);
+    const url = img.data.data;
+    setUrl(url);
+  }, []);
+  
+  
+  const onUploadImageButtonClick = useCallback(() => {
+    if (!inputRef.current) {
+      return;
+    }
+    inputRef.current.click();
+  }, []);
 
   // 가입 정보 유효성 체크
   const handleSubmit = e => {
@@ -177,6 +201,8 @@ const SignUp = () => {
           <Typography component="h1" variant="h5">
             회원가입
           </Typography>
+          <input hidden type="file" accept="image/*" ref={inputRef} onChange={onUploadImage} />
+          <Avatar onClick={onUploadImageButtonClick} sx={{margin:2,width:'15vh', height:'15vh'}} aria-label="recipe" src={url} />
           <Box
             component="form"
             noValidate
