@@ -1,9 +1,8 @@
 import { Button, Grid, TextField, FormHelperText} from '@mui/material';
-import axios from '../util/api';
+import axios from 'axios';
 import * as React from 'react';
 import { useState } from 'react';
 import styled from "styled-components"
-import customAxios from '../util/api';
 
 // mui의 css 우선순위가 높기때문에 important를 설정 - 실무하다 보면 종종 발생 우선순위 문제
 const FormHelperTexts = styled(FormHelperText)`
@@ -21,8 +20,8 @@ const EmailAuth = ({ email, toggleAuthDisable, toggleDisable }) => {
     };
 
     
-    const handleEmailAuth = () => {
-        customAxios
+    const handleEmailAuth =async () => {
+        await axios
         .post("/api/users/join/email/auth", {email, authCode})
         .then(function (response) {
           console.log(response, "성공")
