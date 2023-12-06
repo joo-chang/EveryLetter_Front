@@ -103,7 +103,7 @@ export default function Writer(props) {
       previewStyle="vertical"
       initialEditType="markdown"
       placeholder="글을 작성해 주세요"
-      onChange={onChangeContent}
+      // onChange={onChangeContent}
       plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}
       height="60vh"
       hooks={{

@@ -40,9 +40,8 @@ const BBS = () => {
           setCategoryId(2)
         }
       };
-    const handlePostDetail = (board) => {
-      console.log(board.id)
-      navigate('/post/detail', {state: board.id})
+    const handlePostDetail = (boardId) => {
+      navigate('/post/detail', {state: boardId})
     };
     const handleAddPost = () => {
       navigate('/post/write');
@@ -90,7 +89,7 @@ const BBS = () => {
             <Box>
                 {boardList.map((board) => (
                     <Grid key={board.id} item xs={12} margin={1}>
-                        <SubCard title={board.title} onClick={() => handlePostDetail(board)}>
+                        <SubCard title={board.title} onClick={() => handlePostDetail(board.id)}>
                           <Box sx={{ display: 'flex'}}>
                             <Avatar sx={{width: 20, height: 20, marginRight:1}} aria-label="recipe" src={board.profileUrl} />
                             <Typography sx={{fontSize:12, marginRight:1}}>{board.nickname}</Typography>  

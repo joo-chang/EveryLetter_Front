@@ -8,7 +8,7 @@ import Prism from 'prismjs';
 import { useEffect, useState } from 'react';
 import customAxios from '../../util/api';
 import { useLocation } from 'react-router-dom';
-import { Avatar, Card, CardContent, CardHeader, IconButton, Typography } from '@mui/material';
+import { Avatar, Box, Card, CardContent, CardHeader, Typography } from '@mui/material';
 import moment from 'moment';
 import { elapsedTime } from "../../util/common"
 import ReplyCard from '../../components/ReplyCard';
@@ -23,9 +23,13 @@ const PostDetail = (props) => {
         name: "",
         content: ""
     }
-
+    const [inputs, setInputs] = useState({
+      content: "",
+      userId: localStorage.getItem('userId')
+    })
     const [post, setPost] = useState({initialPost});
-    const {id, createdDate, nickname, viewCnt, name, content} = post;
+    const [replyList, setRelpyList] = useState([]);
+    const {content, postId, userId} = inputs;
     
     useEffect(() => {
         console.log(state)
@@ -33,16 +37,35 @@ const PostDetail = (props) => {
         customAxios.get('/api/post/detail/'+state) // 2) 게시글 목록 데이터에 할당  
         .then((response) => {
             console.log(response.data.data)
-            
-            setPost(response.data.data)
+            setPost(response.data.data.postDto);
+            setRelpyList(response.data.data.replyList);
           })
         const formattedDate = moment(post.createdDate).format('YYYY/MM/DD HH:MM:SS');
         console.log(formattedDate)
         setPost({...post, ['createdDate']: formattedDate});
+
       }, []);
 
+
+      const handleReplyPost = () => {
+          if(confirm('댓글을 등록 하시겠습니까?')){
+              customAxios.post("/api/post/reply/write/"+ state, inputs)
+              .then(function (response) {
+                  console.log(response, "성공");
+                  alert("게시글 등록 완료했습니다.");
+                  location.reload();
+              })
+              .catch(function (err) {
+                  console.log(err.response)
+              })
+        }
+      }
+
+  
+  
+
   return (
-    <>
+    <Box >
         <Card sx={{marginBottom:2}}> 
             <CardHeader
         avatar={
@@ -50,24 +73,44 @@ const PostDetail = (props) => {
         }
         title={post.nickname}
         subheader={ elapsedTime(post.createdDate) }
-      />
+        />
             <CardContent sx={{margin:'20px'}}>
                 <Typography gutterBottom variant="h5" component="div">
                     {post.title}
                 </Typography>
                 <br />
                 {post.content && (
-                    <Viewer
-                    initialValue={post.content || ''}
-                    plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}
-                    />
+                  <Viewer
+                  initialValue={post.content || ''}
+                  plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}
+                  />
                 )}
             </CardContent>
             
         </Card>
-        <ReplyCard postId={post.postId} />
-      
-    </>
+        <ReplyCard setInputs={setInputs} onClick={handleReplyPost} />
+        {replyList.map(reply => {
+          return (
+            <Card key={reply.replyId} variant=""> 
+              <CardHeader 
+                avatar={
+                  <Avatar aria-label="recipe" src={reply.profileUrl} />
+                }
+                title={reply.nickname}
+                subheader={ elapsedTime(reply.createdDate) }
+                />
+              <CardContent >
+                {reply.content && (
+                  <Viewer
+                  initialValue={reply.content || ''}
+                  plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}
+                  />
+                  )}
+              </CardContent>
+            </Card>
+          );
+        })}
+      </Box>
   );
 };
 

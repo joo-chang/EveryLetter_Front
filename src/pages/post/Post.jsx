@@ -44,8 +44,6 @@ const Post = () => {
     return (
       <div >
         <Writer setInputs={setInputs} onClick={handlePost}/>
-
-
       </div>
     )
   }
