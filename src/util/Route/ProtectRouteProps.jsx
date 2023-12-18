@@ -47,6 +47,14 @@ const category = [
         sub: [],
       }
     ],
+  },
+  {
+    idx: 6,
+    name: "채팅",
+    path: "/chat",
+    role: ["USER", "LETTER", "ADMIN"],
+    sub: [
+    ],
   }
 ];
 export default function ProtectRoute() {

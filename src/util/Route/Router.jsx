@@ -13,6 +13,7 @@ import LoginLayout from "../../layout/login/LoginLayout";
 import Post from "../../pages/post/Post";
 import BBS from "../../pages/post/Bbs";
 import PostDetail from "../../pages/post/PostDetail";
+import ChatRoom from "../../components/ChatRoom";
 
 export default function Router() {
   return (
@@ -44,6 +45,7 @@ export default function Router() {
               <Route path="/post/write" element={<Post />}/>
               <Route path="/post/detail" element={<PostDetail />}/>
               <Route path="/post" element={<BBS />}/>
+              <Route path="/chat" element={<ChatRoom />}/>
             </Route>
           </Route>
           <Route element={<ProtectRoute/>}>

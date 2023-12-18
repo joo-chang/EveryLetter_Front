@@ -48,10 +48,6 @@ const BBS = () => {
     }
     useEffect(() => {
       getCategory();
-      getBoardList(); // 1) 게시글 목록 조회 함수 호출
-    }, []);
-    useEffect(() => {
-      getCategory();
       getBoardList();
     }, [categoryId])
     return (
