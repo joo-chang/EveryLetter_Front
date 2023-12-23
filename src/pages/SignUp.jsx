@@ -134,6 +134,12 @@ const SignUp = () => {
     console.log(img);
     const url = img.data.data;
     setUrl(url);
+    setInputs(prestate => {
+      return {
+        ...prestate,
+        ["profile"]: url
+      }
+    });
   }, []);
   
   
