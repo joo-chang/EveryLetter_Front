@@ -23,6 +23,8 @@ import axios from "axios"
 import KakaoLogin from "../oauth/KakaoLogin"
 import NaverLogin from "../oauth/NaverLogin"
 import { setLoginInfo } from "../util/common"
+import { useSetRecoilState } from "recoil"
+import { userState } from "../util/atom"
 
 // mui의 css 우선순위가 높기때문에 important를 설정 - 실무하다 보면 종종 발생 우선순위 문제
 const FormHelperTexts = styled(FormHelperText)`
@@ -44,6 +46,8 @@ const Login = () => {
   const [nameError, setNameError] = useState("")
   const [registerError, setRegisterError] = useState("")
   const navigate = useNavigate()
+  const setUser = useSetRecoilState(userState);
+
 
   const handleAgree = event => {
     setChecked(event.target.checked)
@@ -58,7 +62,9 @@ const Login = () => {
       .post("/api/auth/login", postData)
       .then(function (response) {
         const accessToken = response.headers.authorization
+        console.log(response.data.data)
         setLoginInfo(accessToken);
+        setUser(response.data.data);
         navigate("/")
       })
       .catch(function (err) {

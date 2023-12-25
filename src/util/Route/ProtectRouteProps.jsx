@@ -55,6 +55,14 @@ const category = [
     role: ["USER", "LETTER", "ADMIN"],
     sub: [
     ],
+  },
+  {
+    idx: 7,
+    name: "내 정보",
+    path: "/profile",
+    role: ["USER", "LETTER", "ADMIN"],
+    sub: [
+    ],
   }
 ];
 export default function ProtectRoute() {

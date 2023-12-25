@@ -21,7 +21,6 @@ function Header() {
 
   const handleCloseNavMenu = (e) => {
     console.log(e.target.value);
-    setSelectedMenu(e.target.value);
     if(e.target.value === '뉴스레터'){
       navigate("/album");
     }else if (e.target.value === '커뮤니티'){

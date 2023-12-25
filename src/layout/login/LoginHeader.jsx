@@ -41,6 +41,7 @@ function LoginHeader() {
   const handleCloseUserMenu = (e) => {
     console.log(e.target.innerText);
     if(e.target.innerText === '내정보'){
+      navigate("/profile");
     }else if (e.target.innerText === '로그아웃'){
       deleteLoginInfo();
       navigate('/login');
