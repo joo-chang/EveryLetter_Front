@@ -6,6 +6,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import { useState } from "react";
+import ProfileModify from "./ProfileModify";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -48,22 +49,21 @@ const Profile = () => {
     setValue(newValue);
   };
 
-  const [user, setUser] = useRecoilState(userState);
 
-    return (
-      <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 224 }}>
-        <Box sx={{ borderRight: 1, borderColor: 'divider' }}>
-          <Tabs orientation="vertical" variant="scrollable" value={value} onChange={handleChange} aria-label="Vertical tabs example">
-            <Tab label="프로필" {...a11yProps(0)} />
-            <Tab label="계정 관리" {...a11yProps(1)} />
-          </Tabs>
-        </Box>
-        <TabPanel value={value} index={0}>
-          
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-        </TabPanel>
+  return (
+    <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: '100%' }}>
+      <Box sx={{ borderRight: 1, borderColor: 'divider' }}>
+        <Tabs orientation="vertical" variant="scrollable" value={value} onChange={handleChange} aria-label="Vertical tabs example">
+          <Tab label="프로필" {...a11yProps(0)} />
+          <Tab label="계정 관리" {...a11yProps(1)} />
+        </Tabs>
+      </Box>
+      <TabPanel value={value} index={0}>
+        <ProfileModify />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+      </TabPanel>
     </Box>
-    )
-  }
-  export default Profile;
+  )
+}
+export default Profile;

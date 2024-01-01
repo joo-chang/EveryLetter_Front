@@ -3,9 +3,11 @@ import Loading from "../components/Loading";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { setLoginInfo } from "../util/common";
+import { useSetRecoilState } from "recoil";
 
 function NaverCallback() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const setUser = useSetRecoilState(userState);
   useEffect(() => {
     const code = new URL(window.location.href).searchParams.get("code");
     const state = new URL(window.location.href).searchParams.get("state");
@@ -18,6 +20,7 @@ function NaverCallback() {
     }).then((response) => {
       const accessToken = response.headers.authorization;
       setLoginInfo(accessToken);
+      setUser(response.data.data);
       navigate("/")
     }).catch((err) => {
       //에러발생 시 경고처리 후 login 페이지로 전환

@@ -3,10 +3,11 @@ import Loading from "../components/Loading";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { setLoginInfo } from "../util/common";
+import { useSetRecoilState } from "recoil";
 
 function KakaoCallback() {
     const navigate = useNavigate()
-
+    const setUser = useSetRecoilState(userState);
     //최초 렌더링 시 발동
     useEffect(() => {
       const code = new URL(window.location.href).searchParams.get("code");
@@ -17,6 +18,7 @@ function KakaoCallback() {
       }).then((response) => {
           const accessToken = response.headers.authorization
           setLoginInfo(accessToken);
+          setUser(response.data.data);
           navigate("/")
         }).catch((err) => {
           //에러발생 시 경고처리 후 login 페이지로 전환
